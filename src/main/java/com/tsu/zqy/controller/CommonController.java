@@ -76,7 +76,4 @@ public class CommonController {
         List<Student> students = teacherService.getStudents(id);
         return students;
     }
-
-
-
 }
