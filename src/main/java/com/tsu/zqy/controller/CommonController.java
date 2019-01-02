@@ -51,9 +51,7 @@ public class CommonController {
             } else {
                 return "redirect:/login.html";
             }
-
         } else {
-
             Teacher teacher = teacherService.login(user);
             List<Student> students = teacherService.getStudents(teacher.getId());
             teacher.setStudents(students);
