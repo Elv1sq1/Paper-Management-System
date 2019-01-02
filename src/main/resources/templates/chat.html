@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p th:text="给+${student.name}+的留言"></p>
+<!--/*@thymesVar id="id" type="java"*/-->
+<form th:action="@{/toChat}" method="post">
+
+    <input type="hidden" name="sid" th:value="${student.id}">
+    <textarea name="chatWord"></textarea>
+    <input type="submit" value="提交">
+
+</form>
+
+
+</body>
+</html>

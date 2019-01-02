@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<style>
+    table, table tr th, table tr td {
+        border: 2px solid #0094ff;
+    }
+
+    table {
+        width: 400px;
+        min-height: 25px;
+        line-height: 25px;
+        text-align: center;
+        border-collapse: collapse;
+    }
+</style>
+<!--<script src="/webjars/jquery/3.3.0/jquery.js/"></script>-->
+<!--<script type="text/javascript">-->
+    <!--$(document).ready(function () {-->
+        <!--$("button").click(function () {-->
+            <!--var id = $("#tid").text()-->
+            <!--$.post({-->
+                <!--url: "getValue",-->
+                <!--data:{"id":id},-->
+                <!--dataType: "json",-->
+                <!--success: function (data) {-->
+                    <!--// alert(data.name);-->
+                    <!--// $("p").append(" <b>"+data[0].name+"</b>");-->
+                    <!--// $("p").append(" <b>"+data[0].username+"</b>");-->
+                    <!--// $("p").append(" <b>"+data[0].password+"</b><br>");-->
+
+                    <!--$("#list").empty()-->
+                    <!--$(".ll").empty()-->
+                     <!--var str = "<tr>"-->
+                    <!--$.each(data, function (i, item) {-->
+                        <!--console.log(i, item);-->
+
+                        <!--str += "<td "+item.id +"></td> " +-->
+                                 <!--"<td "+item.name +"></td>"+-->
+                                      <!--"<td "+item.cid +"></td>"-->
+
+                        <!--//-->
+                        <!--// $("#list").append(" <td>" + item.id + "</td>");-->
+                        <!--// $("#list").append(" <td>" + item.name + "</td>");-->
+                        <!--// $("#list").append(" <td>" + item.cid + "</td>");-->
+                        <!--// $("#list").append("<td><a th:href=@{/chat(id=${student.id})}'>留言</a></td>");-->
+                    <!--});-->
+                    <!--str += "</tr>"-->
+                    <!--$("#list").append(str);-->
+                <!--}-->
+            <!--})-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->
+
+<body>
+<p th:text="${session.user.name}+',老师你好'"></p>
+
+<table th:object="${session.user}">
+    <tr>
+        <th>老师编号</th>
+        <th>姓名</th>
+        <th>所属学院</th>
+        <th>学生个数</th>
+        <th>操作</th>
+    </tr>
+    <tr >
+        <td  th:value="*{id}" th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{college}"></td>
+        <td th:text="*{students.size()}"></td>
+        <td><a th:href="@{/toAddStudent(id=*{id})}">添加学生</a></td>
+    </tr>
+</table>
+
+<hr>
+<!--<button>刷新</button>-->
+<span th:text="${msg}"></span>
+<table>
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>班级</th>
+        <th>论文</th>
+        <th>查看论文</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="student :${session.user.students} " >
+        <td th:text="${student.id}" ></td>
+        <td th:text="${student.name}" ></td>
+        <td th:text="${student.cid}" ></td>
+        <td th:if="${#strings.isEmpty(student.homework) || student.homework ==null}" th:text="论文未上传"></td>
+        <td th:if="${!#strings.isEmpty(student.homework)}" th:text="论文已上传"></td>
+        <td th:if="${#strings.isEmpty(student.homework) || student.homework ==null} ">无论文</td>
+        <td th:if="${!#strings.isEmpty(student.homework) }"><a th:href="@{'/download/'+${student.id}}" >下载</a></td>
+        <td >
+            <a th:href="@{/chat(id=${student.id})}">留言</a> |
+            <a th:href="@{'/delete/'+${student.id}}">删除</a>
+        </td>
+    </tr>
+
+
+</table>
+
+</body>
+</html>

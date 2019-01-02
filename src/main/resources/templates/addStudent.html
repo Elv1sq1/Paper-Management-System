@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+
+<form method="post" action="/addStudent" >
+    <input type="hidden" name="tid" th:value="${id}">
+    用户名: <input type="text" name = "username"><br>   <!--一个字占四个空格-->
+    姓&nbsp;&nbsp;&nbsp;&nbsp;名: <input type="text" name="name"><br>
+    密&nbsp;&nbsp;&nbsp;&nbsp;码: <input type="password" name="password"><br>
+    年&nbsp;&nbsp;&nbsp;&nbsp;龄: <input type="text" name="age"><br>
+    班&nbsp;&nbsp;&nbsp;&nbsp;级: <input type="text" name="cid"><br>
+    <input type="submit" value="提交"><br>
+
+</form>
+
+
+
+</body>
+</html>

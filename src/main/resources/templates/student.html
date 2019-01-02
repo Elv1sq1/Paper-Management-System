@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    table, table tr th, table tr td {
+        border: 2px solid #0094ff;
+    }
+
+    table {
+        width: 600px;
+        min-height: 25px;
+        line-height: 25px;
+        text-align: center;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+<p th:text="${session.user.name}+',同学你好'"></p>
+
+<span style="color: #ff3322;">[[${msg}]]</span><br>
+<a th:href="@{/toUpdate.html}">上传论文</a>
+<a th:href="@{'/toDelete/'+${session.user.id}}" th:if="${!#strings.isEmpty(session.user.homework)}">删除论文</a>
+
+
+<table th:object="${session.user}">
+    <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>所属学院</th>
+        <th>指导老师</th>
+        <th>论文状态</th>
+        <th>老师留言</th>
+    </tr>
+    <tr>
+        <td th:text="*{id}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{cid}"></td>
+        <td th:text="${teacher.name}"></td>
+        <td th:if=" *{ #strings.isEmpty(homework) || homework == null}" th:text="论文未上传"></td>
+        <td th:if="*{!#strings.isEmpty(homework)}" th:text="论文已上传"></td>
+        <td th:text="*{chat}"></td>
+    </tr>
+
+
+</table>
+
+
+</body>
+</html>

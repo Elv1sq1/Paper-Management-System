@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<!--　<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>-->
+<!--<script th:src="@{/webjars/jquery/3.3.0/jquery.js/jqury.min.js/}"/>-->
+<!--<script th:src="@{/webjars/jquery/3.3.0/jquery.js/}"></script>-->
+<script src="/webjars/jquery/3.3.0/jquery.js/"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("button").click(function () {
+            var id = $("#queryId").val()
+            $.post({
+                url: "getValue",
+                data:{"id":id},
+                dataType: "json",
+                success: function (data) {
+                    // alert(data.name);
+                    // $("p").append(" <b>"+data[0].name+"</b>");
+                    // $("p").append(" <b>"+data[0].username+"</b>");
+                    // $("p").append(" <b>"+data[0].password+"</b><br>");
+                    if (data == null ||data.length==0) {
+                        $("span").append("该教师无学生!<br>");
+                    }
+
+                    $.each(data, function (i, item) {
+                        console.log(i, item);
+
+                        $("span").append(" <b>" + item.id + "</b>");
+                        $("span").append(" <b>" + item.name + "</b>");
+                        $("span").append(" <b>" + item.username + "</b>");
+                        $("span").append(" <b>" + item.job + "</b>");
+                        $("span").append(" <b>" + item.password + "</b><br>");
+                    });
+                }
+            })
+        });
+    });
+</script>
+</head>
+<body>
+
+<form enctype="multipart/form-data" method="post" action="/upload">
+    文件<input type="file" name="file"/><br>
+    <input type="submit" value="上传"/>
+</form>
+
+<hr>
+<span></span>
+教师号:<input type="text" id = "queryId" name = "id">
+<button>获得信息</button>
+</body>
+</html>

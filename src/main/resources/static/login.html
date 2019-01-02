@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="/index" method="post">
+
+       用户名:<input type="text" name="username"><br>
+    密码:<input type="password" name="password"><br>
+
+    职业:
+    老师<input type="radio" name="job" value="teacher">
+    学生<input type="radio" name="job" value="student" checked>
+            <!--<img th:src="@{10505643-5c20-4dc8-b5fe-ded1d9e5e442.jpg}">-->
+    <input type="submit" value="登录"/>
+
+
+</form>
+
+
+</body>
+</html>
